@@ -1,0 +1,247 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Tenant API",
+    "description": "Sample spec for Swagger",
+    "termsOfService": "http://swagger.io/terms/"
+  },
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Tenant",
+      "description": "API Calls regarding the tenants"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/tenants": {
+      "get": {
+        "tags": [
+          "Tenant"
+        ],
+        "description": "get all tenants",
+        "operationId": "for the URL",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Get all tenants from DB",
+            "schema": {
+              "$ref": "#/definitions/Tenant"
+            }
+          }
+        }
+      }
+    },
+    "/tenants/{tenantId}/configuration": {
+      "get": {
+        "tags": [
+          "Tenant"
+        ],
+        "description": "Get config of tenant",
+        "operationId": "for the URL",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "Id of tenant",
+            "required": true,
+            "example": "5915f8cd0dd894258039e48f"
+          },
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "description": "Token from Login",
+            "required": true,
+            "example" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyIkX18iOnsic3RyaWN0TW9kZSI6dHJ1ZSwic2VsZWN0ZWQiOnt9LCJnZXR0ZXJzIjp7fSwid2FzUG9wdWxhdGVkIjpmYWxzZSwiYWN0aXZlUGF0aHMiOnsicGF0aHMiOnsiY29uZmlndXJhdGlvbi5jYXJzIjoiaW5pdCIsImNvbmZpZ3VyYXRpb24ucmVzZWxsZXIiOiJpbml0IiwiY29uZmlndXJhdGlvbi5yZXBhaXJTZXJ2aWNlIjoiaW5pdCIsImNvbmZpZ3VyYXRpb24uY2hhdEhpc3RvcnkiOiJpbml0IiwiX192IjoiaW5pdCIsIm5hbWUiOiJpbml0IiwicGFzc3dvcmQiOiJpbml0IiwiY3JlYXRlZCI6ImluaXQiLCJ1cGRhdGVkIjoiaW5pdCIsIl9pZCI6ImluaXQifSwic3RhdGVzIjp7Imlnbm9yZSI6e30sImRlZmF1bHQiOnt9LCJpbml0Ijp7ImNvbmZpZ3VyYXRpb24uY2hhdEhpc3RvcnkiOnRydWUsImNvbmZpZ3VyYXRpb24ucmVwYWlyU2VydmljZSI6dHJ1ZSwiY29uZmlndXJhdGlvbi5yZXNlbGxlciI6dHJ1ZSwiY29uZmlndXJhdGlvbi5jYXJzIjp0cnVlLCJfX3YiOnRydWUsIm5hbWUiOnRydWUsInBhc3N3b3JkIjp0cnVlLCJjcmVhdGVkIjp0cnVlLCJ1cGRhdGVkIjp0cnVlLCJfaWQiOnRydWV9LCJtb2RpZnkiOnt9LCJyZXF1aXJlIjp7fX0sInN0YXRlTmFtZXMiOlsicmVxdWlyZSIsIm1vZGlmeSIsImluaXQiLCJkZWZhdWx0IiwiaWdub3JlIl19LCJlbWl0dGVyIjp7ImRvbWFpbiI6bnVsbCwiX2V2ZW50cyI6eyJzYXZlIjpbbnVsbCxudWxsLG51bGwsbnVsbCxudWxsLG51bGwsbnVsbCxudWxsXSwiaXNOZXciOltudWxsLG51bGwsbnVsbCxudWxsLG51bGwsbnVsbCxudWxsLG51bGxdfSwiX2V2ZW50c0NvdW50IjoyLCJfbWF4TGlzdGVuZXJzIjowfX0sImlzTmV3IjpmYWxzZSwiX2RvYyI6eyJjb25maWd1cmF0aW9uIjp7ImNhcnMiOlt7Il9pZCI6IjU5MWY0ODc5MTc4ZjhkMTI0ODdkZjM2YyIsImRlc2NyaXB0aW9uIjoic2Now7ZuZXMgQXV0byIsIm5hbWUiOiJBdWRpIEEzIn0seyJfaWQiOiI1OTFmNDg3OTE3OGY4ZDEyNDg3ZGYzNmIiLCJkZXNjcmlwdGlvbiI6ImtsZWluZXIgRmxpdHplciIsIm5hbWUiOiJBdWRpIEExIn1dLCJyZXNlbGxlciI6W10sInJlcGFpclNlcnZpY2UiOlt7Il9pZCI6IjU5MWIyYzhjOThlMzE5MjBkODIwNTA0MSIsIm5hbWUiOiJCTVcgS29uc3RhbnoiLCJhZGRyZXNzIjoiS29uc3RhbnplcnN0ciAyMywgS29uc3RhbnoiLCJvcGVuaW5ncyI6W3siZnJvbSI6IjIwMTctMDUtMTZUMTY6NDM6NTAuMDAwWiIsInVudGlsIjoiMjAxNy0wNS0xNlQxNjo0Mzo1MC4wMDBaIiwiX2lkIjoiNTkxYjJjOGM5OGUzMTkyMGQ4MjA1MDQyIn1dfV0sIm5ld3MiOnt9LCJjaGF0SGlzdG9yeSI6W119LCJfX3YiOjAsIm5hbWUiOiJBdWRpIiwicGFzc3dvcmQiOiIkMmEkMTAkeWlqSzg1ZGhRMmVxUFF0VEZxWmZ5dXBMNmhDTFBYYks1NFJ1NEg3dUpiL2VhSXNIMUdhSi4iLCJjcmVhdGVkIjoiMjAxNy0wNS0xMlQxODowMjo1My44OThaIiwidXBkYXRlZCI6IjIwMTctMDUtMTJUMTg6MDI6NTMuODk4WiIsIl9pZCI6IjU5MTVmOGNkMGRkODk0MjU4MDM5ZTQ4ZiJ9LCJpYXQiOjE0OTUzMDk2NjEsImV4cCI6MTUyNjg0NTY2MX0.UKwz_Npa1bELXaZi_a5OYtJFVXTzQ-3eAL1BeSv_ieg"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Config File",
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Tenant"
+        ],
+        "description": "Update config of tenant",
+        "operationId": "for the URL",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "Id of tenant",
+            "required": true,
+            "example": "5915f8cd0dd894258039e48f"
+          },
+          {
+            "name": "x-access-token",
+            "in": "header",
+            "description": "Token from Login",
+            "required": true,
+            "example" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyIkX18iOnsic3RyaWN0TW9kZSI6dHJ1ZSwic2VsZWN0ZWQiOnt9LCJnZXR0ZXJzIjp7fSwid2FzUG9wdWxhdGVkIjpmYWxzZSwiYWN0aXZlUGF0aHMiOnsicGF0aHMiOnsiY29uZmlndXJhdGlvbi5jYXJzIjoiaW5pdCIsImNvbmZpZ3VyYXRpb24ucmVzZWxsZXIiOiJpbml0IiwiY29uZmlndXJhdGlvbi5yZXBhaXJTZXJ2aWNlIjoiaW5pdCIsImNvbmZpZ3VyYXRpb24uY2hhdEhpc3RvcnkiOiJpbml0IiwiX192IjoiaW5pdCIsIm5hbWUiOiJpbml0IiwicGFzc3dvcmQiOiJpbml0IiwiY3JlYXRlZCI6ImluaXQiLCJ1cGRhdGVkIjoiaW5pdCIsIl9pZCI6ImluaXQifSwic3RhdGVzIjp7Imlnbm9yZSI6e30sImRlZmF1bHQiOnt9LCJpbml0Ijp7ImNvbmZpZ3VyYXRpb24uY2hhdEhpc3RvcnkiOnRydWUsImNvbmZpZ3VyYXRpb24ucmVwYWlyU2VydmljZSI6dHJ1ZSwiY29uZmlndXJhdGlvbi5yZXNlbGxlciI6dHJ1ZSwiY29uZmlndXJhdGlvbi5jYXJzIjp0cnVlLCJfX3YiOnRydWUsIm5hbWUiOnRydWUsInBhc3N3b3JkIjp0cnVlLCJjcmVhdGVkIjp0cnVlLCJ1cGRhdGVkIjp0cnVlLCJfaWQiOnRydWV9LCJtb2RpZnkiOnt9LCJyZXF1aXJlIjp7fX0sInN0YXRlTmFtZXMiOlsicmVxdWlyZSIsIm1vZGlmeSIsImluaXQiLCJkZWZhdWx0IiwiaWdub3JlIl19LCJlbWl0dGVyIjp7ImRvbWFpbiI6bnVsbCwiX2V2ZW50cyI6eyJzYXZlIjpbbnVsbCxudWxsLG51bGwsbnVsbCxudWxsLG51bGwsbnVsbCxudWxsXSwiaXNOZXciOltudWxsLG51bGwsbnVsbCxudWxsLG51bGwsbnVsbCxudWxsLG51bGxdfSwiX2V2ZW50c0NvdW50IjoyLCJfbWF4TGlzdGVuZXJzIjowfX0sImlzTmV3IjpmYWxzZSwiX2RvYyI6eyJjb25maWd1cmF0aW9uIjp7ImNhcnMiOlt7Il9pZCI6IjU5MWY0ODc5MTc4ZjhkMTI0ODdkZjM2YyIsImRlc2NyaXB0aW9uIjoic2Now7ZuZXMgQXV0byIsIm5hbWUiOiJBdWRpIEEzIn0seyJfaWQiOiI1OTFmNDg3OTE3OGY4ZDEyNDg3ZGYzNmIiLCJkZXNjcmlwdGlvbiI6ImtsZWluZXIgRmxpdHplciIsIm5hbWUiOiJBdWRpIEExIn1dLCJyZXNlbGxlciI6W10sInJlcGFpclNlcnZpY2UiOlt7Il9pZCI6IjU5MWIyYzhjOThlMzE5MjBkODIwNTA0MSIsIm5hbWUiOiJCTVcgS29uc3RhbnoiLCJhZGRyZXNzIjoiS29uc3RhbnplcnN0ciAyMywgS29uc3RhbnoiLCJvcGVuaW5ncyI6W3siZnJvbSI6IjIwMTctMDUtMTZUMTY6NDM6NTAuMDAwWiIsInVudGlsIjoiMjAxNy0wNS0xNlQxNjo0Mzo1MC4wMDBaIiwiX2lkIjoiNTkxYjJjOGM5OGUzMTkyMGQ4MjA1MDQyIn1dfV0sIm5ld3MiOnt9LCJjaGF0SGlzdG9yeSI6W119LCJfX3YiOjAsIm5hbWUiOiJBdWRpIiwicGFzc3dvcmQiOiIkMmEkMTAkeWlqSzg1ZGhRMmVxUFF0VEZxWmZ5dXBMNmhDTFBYYks1NFJ1NEg3dUpiL2VhSXNIMUdhSi4iLCJjcmVhdGVkIjoiMjAxNy0wNS0xMlQxODowMjo1My44OThaIiwidXBkYXRlZCI6IjIwMTctMDUtMTJUMTg6MDI6NTMuODk4WiIsIl9pZCI6IjU5MTVmOGNkMGRkODk0MjU4MDM5ZTQ4ZiJ9LCJpYXQiOjE0OTUzMDk2NjEsImV4cCI6MTUyNjg0NTY2MX0.UKwz_Npa1bELXaZi_a5OYtJFVXTzQ-3eAL1BeSv_ieg"
+          },
+          {
+            "name": "configuration",
+            "in": "body",
+            "description": "Updated configuration file for tenant",
+            "required": true,
+            "example": "5915f8cd0dd894258039e48f",
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Config File"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Configuration": {
+      "required": "true",
+      "properties": {
+        "cars": {
+          "type": "array",
+          "items": {
+            "$ref" : "#definitions/Car"
+          }
+        },
+        "reseller": {
+          "type": "array",
+          "items" : {
+            "$ref" : "#definitions/Company"
+          }
+        },
+        "repairService": {
+          "type": "array",
+          "items" : {
+            "$ref" : "#definitions/Company"
+          }
+        },
+        "news": {
+          "type": "array",
+          "items" : {
+            "$ref" : "#definitions/News"
+          }
+        },
+        "chatHistory": {
+          "type": "array",
+          "items" : {
+            "$ref" : "#definitions/ChatHistory"
+          }
+        }
+      }
+    },
+    "Tenant": {
+      "required": "true",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example" : "5915f8cd0dd894258039e48f"
+        },
+        "name": {
+          "type": "string",
+          "example" : "Audi"
+        }
+      }
+    },
+    "Car": {
+      "required": "true",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "Company": {
+      "required": "true",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "openings": {
+          "type": "array",
+          "items" : {
+            "$ref" : "#/definitions/Openings"
+          }
+        }
+      }
+    },
+    "Openings": {
+      "required": "true",
+      "properties": {
+        "day": {
+          "type": "string"
+        },
+        "from": {
+          "type": "string"
+        },
+        "until": {
+          "type": "string"
+        }
+      }
+    },
+    "ChatHistory": {
+      "required": "true",
+      "properties": {
+        "sessionToke": {
+          "type": "string"
+        },
+        "userInput": {
+          "type": "string"
+        },
+        "botOutput": {
+          "type": "string"
+        }
+      }
+    },
+    "News": {
+      "required": "true",
+      "properties": {
+        "date": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
