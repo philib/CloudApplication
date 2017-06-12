@@ -1,0 +1,37 @@
+<ion-content>
+
+    <div padding [@flyInBottomFast]="cloudState" id="cloud-layer" >
+        <ion-row>
+            <ion-col>
+                <img [@flyInBottomSlow]="logoState" src="assets/icon/logo.svg"/>
+            </ion-col>
+        </ion-row>
+
+        <ion-list>
+            <label class="item item-input">
+                <ion-label color="primary" stacked></ion-label>
+                <ion-input class="input-layout" [(ngModel)]="companyName" type="text"
+                           placeholder="Company Name"></ion-input>
+            </label>
+            <label class="item item-input">
+                <ion-label color="primary" stacked></ion-label>
+                <ion-input class="input-layout" [(ngModel)]="password" type="password"
+                           placeholder="Password"></ion-input>
+            </label>
+        </ion-list>
+
+        <ion-row>
+            <ion-col>
+                <button ion-button class="button-layout" (click)="login()" [@fadeIn]="loginState">Login</button>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col>
+                <button ion-button class="button-layout" (click)="register()" [@fadeIn]="loginState">Sign Up</button>
+            </ion-col>
+        </ion-row>
+
+    </div>
+
+</ion-content>

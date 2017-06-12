@@ -1,0 +1,20 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title center>Welcome to {{chatbotName}} chat bot</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content #content padding class="has-footer has-header">
+    <ion-list #list>
+        <ion-item text-wrap ngClass="{{msg.from}}" *ngFor="let msg of chat">
+            <ion-spinner text-center id="spinner" *ngIf="!msg.msg" name="bubbles"></ion-spinner>
+            <div [innerHTML]="msg.msg"></div>
+        </ion-item>
+    </ion-list>
+</ion-content>
+<ion-footer>
+    <ion-item id="sendMsg">
+        <ion-input (keypress)="eventHandler($event.keyCode)" [(ngModel)]="chatMessage" type="text" placeholder="Type a message"></ion-input>
+        <button ion-button item-right (click)="sendMessage()">Send</button>
+    </ion-item>
+</ion-footer>
