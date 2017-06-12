@@ -1,0 +1,258 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Authentication API",
+    "description": "Sample spec for Swagger",
+    "termsOfService": "http://swagger.io/terms/"
+  },
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Tenant",
+      "description": "API Calls regarding the tenants"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "description": "Login for tenants",
+        "operationId": "for the URL",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "login",
+            "in": "body",
+            "description": "Login Body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Login"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/LoginResponse"
+            }
+          }
+        }
+      }
+    },
+    "/register": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "description": "Register new tenant",
+        "operationId": "for the URL",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "register",
+            "in": "body",
+            "description": "Register Body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Register"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Config File",
+            "schema": {
+              "$ref": "#/definitions/Tenant"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Register": {
+      "required": "true",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example" : "Audi"
+        },
+        "password": {
+          "type": "string",
+          "example" : "audi"
+        }
+      }
+    },
+    "Login": {
+      "required": "true",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example" : "Audi"
+          },
+        "password": {
+          "type": "string",
+          "example" : "audi"
+        }
+      }
+    },
+    "LoginResponse": {
+      "properties": {
+        "success" : {
+          "type" : "boolean"
+        },
+        "tenant": {
+            "$ref": "#/definitions/Tenant"
+        },
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "Tenant": {
+      "required": "true",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example" : "5915f8cd0dd894258039e48f"
+        },
+        "name": {
+          "type": "string"
+        },
+        "password" : {
+          "type" : "string"
+        },
+        "updated" : {
+          "type" : "string"
+        },
+        "created" : {
+          "type" : "string"
+        },
+        "configuration": {
+            "$ref": "#/definitions/Configuration"
+        }
+      }
+    },
+    "Configuration": {
+      "required": "true",
+      "properties": {
+        "cars": {
+          "type": "array",
+          "items": {
+            "$ref" : "#definitions/Car"
+          }
+        },
+        "reseller": {
+          "type": "array",
+          "items" : {
+            "$ref" : "#definitions/Company"
+          }
+        },
+        "repairService": {
+          "type": "array",
+          "items" : {
+            "$ref" : "#definitions/Company"
+          }
+        },
+        "news": {
+          "type": "array",
+          "items" : {
+            "$ref" : "#definitions/News"
+          }
+        },
+        "chatHistory": {
+          "type": "array",
+          "items" : {
+            "$ref" : "#definitions/ChatHistory"
+          }
+        }
+      }
+    },
+    "Car": {
+      "required": "true",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "Company": {
+      "required": "true",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "openings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Openings"
+          }
+        }
+      }
+    },
+    "Openings": {
+      "required": "true",
+      "properties": {
+        "from": {
+          "type": "string"
+        },
+        "until": {
+          "type": "string"
+        }
+      }
+    },
+    "ChatHistory": {
+      "required": "true",
+      "properties": {
+        "sessionToke": {
+          "type": "string"
+        },
+        "userInput": {
+          "type": "string"
+        },
+        "botOutput": {
+          "type": "string"
+        }
+      }
+    },
+    "News": {
+      "required": "true",
+      "properties": {
+        "date": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

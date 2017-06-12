@@ -1,0 +1,66 @@
+<!--
+  Generated template for the ResellerDetail page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{repairStore.name}}
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary">Back</span>
+      </button>
+
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="deleteReseller()">
+        <ion-icon color="danger" name="trash"></ion-icon>
+      </button>
+
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+
+
+    <ion-item>
+      <ion-label stacked>Address</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label >{{repairStore.address}}</ion-label>
+    </ion-item>
+
+  </ion-list>
+  <ion-list>
+
+    <ion-list-header>
+      Opening hours
+    </ion-list-header>
+
+    <ion-item-sliding *ngFor="let open of this.repairStore.openings">
+      <ion-item>
+        <ion-label>
+          {{open.day}}
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>From</ion-label>
+        <ion-label>{{open.from}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>To</ion-label>
+        <ion-label>{{open.until}}</ion-label>
+      </ion-item>
+
+    </ion-item-sliding>
+  </ion-list>
+
+</ion-content>

@@ -1,0 +1,34 @@
+<!--
+  Generated template for the Reseller page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Reseller</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="addReseller()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-content>
+        <ion-list>
+            <button ion-item *ngFor="let company of this.navParams.data.tenant.configuration.reseller"
+                    (click)="goToDetailView(company)" icon-right>
+                <h2>{{company.name}}</h2>
+                <p>{{company.address}}</p>
+                <ion-note *ngFor="let open of company.openings" item-end>
+                    {{open.day}}
+                </ion-note>
+            </button>
+        </ion-list>
+    </ion-content>
+</ion-content>
