@@ -28,3 +28,15 @@ exports.updateConfiguration = function (req, res, next) {
         return res.json(numAffected);
     });
 }
+
+
+//TEST ONLY
+exports.delete = function (req, res, next) {
+    var tenantId = req.params.tenantId;
+
+    tenantModel.remove({ _id: tenantId }, function (err) {
+        if (err) return handleError(err);
+        // removed!
+        return res.json("success")
+    });
+}
