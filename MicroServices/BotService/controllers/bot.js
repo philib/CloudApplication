@@ -63,6 +63,12 @@ exports.answer = function (req, res, next) {
                     response.data = configuration.reseller;
                     response.intent = intent_CarRetailer;
                 }
+                var history = {
+                    sessionToken: "",
+                    userInput: msg,
+                    botOutput: JSON.stringify(response)
+                }
+                saveConversation(tenantId, history);
                 return res.json(response);
             })
         }
@@ -75,4 +81,10 @@ var getConfiguration = function (tenantId, cb) {
         cb(data.configuration);
     })
 };
+
+var saveConversation = function (tenantId, history) {
+    tenantModel.update({_id: tenantId}, {$addToSet: {'configuration.chatHistory': history}}, function (err, result) {
+        console.log(result)
+    })
+}
 
