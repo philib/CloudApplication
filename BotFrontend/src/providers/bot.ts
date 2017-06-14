@@ -19,7 +19,7 @@ export class Bot {
         this.http.get(this.API_ENDPOINT + this.tenantID + '/conversation?msg=' + msg, headers)
             .map(res => res.json()).subscribe(data => {
 
-                if (!data.intent) {
+                if (data.intent === "No_Intent") {
                     callback("sorry, can you repeat that please")
                 }
 

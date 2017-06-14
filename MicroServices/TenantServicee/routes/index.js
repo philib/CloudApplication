@@ -9,4 +9,8 @@ router.route('/tenants')
 router.get('/tenants/:tenantId/configuration', mid.isAuthenticated, TenantController.getConfiguration);
 router.put('/tenants/:tenantId/configuration', mid.isAuthenticated, TenantController.updateConfiguration);
 
+
+//TEST ONLY
+router.delete('/tenants/:tenantId', TenantController.delete);
+
 module.exports = router;
