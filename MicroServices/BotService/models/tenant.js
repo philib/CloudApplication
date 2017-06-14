@@ -6,8 +6,9 @@ var Company = {
     name: String,
     address: String,
     openings: [{
-        from: Date,
-        until: Date,
+        day: String,
+        from: String,
+        until: String,
     }]
 }
 
@@ -16,6 +17,7 @@ var TenantSchema = new Schema({
     name: {type: String, unique: true},
     password: String,
     configuration: {
+        bot_url: String,
         logo: String,
         botName: String,
         backgroundColor: String,
