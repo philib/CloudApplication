@@ -38,8 +38,9 @@ exports.answer = function (req, res, next) {
     };
 
     lex.postText(params, function (err, data) {
-        if (err) console.log(err, err.stack);
-        else {
+        if (err){
+            console.log(err, err.stack);
+        }else {
             //we need to call tenantsService here and get config,
             //depending on intent we will return the different config params
             getConfiguration(tenantId, function (configuration) {
@@ -84,7 +85,6 @@ var getConfiguration = function (tenantId, cb) {
 
 var saveConversation = function (tenantId, history) {
     tenantModel.update({_id: tenantId}, {$addToSet: {'configuration.chatHistory': history}}, function (err, result) {
-        console.log(result)
     })
 }
 
