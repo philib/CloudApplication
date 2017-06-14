@@ -38,6 +38,11 @@
             <ion-label stacked>Bot Url</ion-label>
             <ion-label>{{this.navParams.data.tenant.name}}</ion-label>
         </ion-item>
+
+        <ion-item no-lines>
+            <h2>Total Bot Usage</h2>
+            <p>{{navParams.data.tenant.configuration.chatHistory.length}} Times</p>
+        </ion-item>
     </ion-list>
 
 
