@@ -2,15 +2,18 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 
+declare let window:any;
+
 @Injectable()
 export class Bot {
 
     private API_ENDPOINT = "http://localhost:8083/"
 
-    //TODO get this from our current logged in tenant
-    private tenantID = '5915f8cd0dd894258039e48f'
+    public tenantID;
 
     constructor(public http: Http) {
+        this.tenantID = window.location.pathname.substr(1) || '5915f8cd0dd894258039e48f';
+        console.log(this.tenantID)
     }
 
     evaluateMessage(msg, callback) {
