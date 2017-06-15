@@ -1,0 +1,5 @@
+
+{
+	"BotService_Endpoint": "http://localhost:8083/",
+	"TenantService_Endpoint": "http://localhost:8082/"
+}

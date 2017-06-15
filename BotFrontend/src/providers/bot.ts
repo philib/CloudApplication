@@ -1,49 +1,51 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import {Injectable} from '@angular/core';
+import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
-import config from 'config'
+import {Config} from '../../config/default.json'
 
-declare let window:any;
+declare let window: any;
 
 @Injectable()
 export class Bot {
 
-    private BOT_ENDPOINT = config.get('BotService_Endpoint') || "http://localhost:8083/"
-    private TENANT_ENDPOINT = process.env.TENANT_ENDPOINT || "http://localhost:8082/"
+    private BOT_ENDPOINT;
+    private TENANT_ENDPOINT;
 
     public tenantID;
 
     constructor(public http: Http) {
-        console.log("BOT_ENDPOINT", this.BOT_ENDPOINT);
-        console.log("TENANT_ENDPOINT", this.TENANT_ENDPOINT);
-        this.tenantID = window.location.pathname.substr(1) || 'audi';
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        this.http.get(this.TENANT_ENDPOINT + 'tenants?name=' + this.tenantID, headers).map(res => res.json()).subscribe(data => {
-            this.tenantID = data._id
-            console.log(this.tenantID, data, data._id)
-        });
+
+        this.http.get('/assets/default.json').map(res => res.json()).subscribe(data => {
+            this.BOT_ENDPOINT = data.BotService_Endpoint;
+            this.TENANT_ENDPOINT = data.TenantService_Endpoint;
+            this.tenantID = window.location.pathname.substr(1) || 'audi';
+            let headers = new Headers({'Content-Type': 'application/json'});
+            this.http.get(this.TENANT_ENDPOINT + 'tenants?name=' + this.tenantID, headers).map(res => res.json()).subscribe(data => {
+                this.tenantID = data._id
+            });
+        })
     }
 
     evaluateMessage(msg, callback) {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let headers = new Headers({'Content-Type': 'application/json'});
         msg = msg.toLowerCase()
         this.http.get(this.BOT_ENDPOINT + this.tenantID + '/conversation?msg=' + msg, headers)
             .map(res => res.json()).subscribe(data => {
 
-                if (data.intent === "No_Intent") {
-                    callback("sorry, can you repeat that please")
-                }
+            if (data.intent === "No_Intent") {
+                callback("sorry, can you repeat that please")
+            }
 
-                if (data.intent === "Intent_News") {
-                    callback(this.transformNews(data))
-                } else if (data.intent === "Intent_CarRetailer") {
-                    callback(this.transformCarRetailer(data))
-                } else if (data.intent === "Intent_CarWorkshop") {
-                    callback(this.transformCarWorkshop(data))
-                } else if (data.intent === "Intent_CarTypes") {
-                    callback(this.transformCarTypes(data))
-                }
-            })
+            if (data.intent === "Intent_News") {
+                callback(this.transformNews(data))
+            } else if (data.intent === "Intent_CarRetailer") {
+                callback(this.transformCarRetailer(data))
+            } else if (data.intent === "Intent_CarWorkshop") {
+                callback(this.transformCarWorkshop(data))
+            } else if (data.intent === "Intent_CarTypes") {
+                callback(this.transformCarTypes(data))
+            }
+        })
     }
 
     transformNews(data) {
