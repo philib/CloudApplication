@@ -1,13 +1,21 @@
 var express = require('express'),
     app = express();
 app.use(express.static('www'));
+var path = require('path');
 
-app.get('/', function (req, res) {
-	res.sendfile('www/index.html')
-});
+var request = require('request');
+
 app.get('/:tenantId', function (req, res) {
-
-    res.sendfile('www/assets/foo.html');
+    var test = req.params.tenantId;
+    console.log(test)
+    //TODO gibts diese tenantID? Falls ja sendfile, falls nein redirect zu google.com
+    request('http://localhost:8082/tenants?name='+test, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            res.sendFile(path.join(__dirname + '/www/assets/foo.html'));
+        }else {
+            return res.redirect('/')
+        }
+    })
 })
 app.set('port', process.env.PORT || 5000);
 app.listen(app.get('port'), function () {
