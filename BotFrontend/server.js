@@ -9,11 +9,11 @@ app.get('/:tenantId', function (req, res) {
     var test = req.params.tenantId;
     var url = app.get('tenant')
     console.log("Express endpoint: ",url)
-    res.sendFile(path.join(__dirname + '/www/assets/foo.html'));
+    return res.sendFile(path.join(__dirname + '/www/assets/foo.html'));
     //TODO gibts diese tenantID? Falls ja sendfile, falls nein redirect zu google.com
     request(url+'/tenants?name='+test, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-            res.sendFile(path.join(__dirname + '/www/assets/foo.html'));
+            return res.sendFile(path.join(__dirname + '/www/assets/foo.html'));
         }else {
             return res.redirect('/')
         }
