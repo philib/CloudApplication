@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
+import config from 'config'
 
 declare let window:any;
 
 @Injectable()
 export class Bot {
 
-    private BOT_ENDPOINT = process.env.BOT_ENDPOINT || "http://localhost:8083/"
+    private BOT_ENDPOINT = config.get('BotService_Endpoint') || "http://localhost:8083/"
     private TENANT_ENDPOINT = process.env.TENANT_ENDPOINT || "http://localhost:8082/"
 
     public tenantID;
