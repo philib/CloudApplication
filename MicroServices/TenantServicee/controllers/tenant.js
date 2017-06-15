@@ -6,10 +6,23 @@ var config = require('config');
 var jwt    = require('jsonwebtoken')
 
 exports.getAllTenants = function (req, res, next) {
-    tenantModel.find({},"_id name").exec(function (err, data) {
-        if (err) return next(err);
-        return res.json(data);
-    })
+    var namequery = req.query.name;
+    if(namequery){
+        tenantModel.find({name:  { $regex : new RegExp(namequery, "i") }},"_id name").exec(function (err, data) {
+            if (err) return next(err);
+            if(data.length > 0){
+                return res.json(data[0]);
+            }else {
+                return res.status(404).json("not found")
+            }
+
+        })
+    }else {
+        tenantModel.find({},"_id name").exec(function (err, data) {
+            if (err) return next(err);
+            return res.json(data);
+        })
+    }
 };
 
 exports.getConfiguration = function (req, res, next) {

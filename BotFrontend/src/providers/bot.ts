@@ -7,19 +7,24 @@ declare let window:any;
 @Injectable()
 export class Bot {
 
-    private API_ENDPOINT = "http://localhost:8083/"
+    private BOT_ENDPOINT = "http://localhost:8083/"
+    private TENANT_ENDPOINT = "http://localhost:8082/"
 
     public tenantID;
 
     constructor(public http: Http) {
-        this.tenantID = window.location.pathname.substr(1) || '5915f8cd0dd894258039e48f';
-        console.log(this.tenantID)
+        this.tenantID = window.location.pathname.substr(1) || 'audi';
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        this.http.get(this.TENANT_ENDPOINT + 'tenants?name=' + this.tenantID, headers).map(res => res.json()).subscribe(data => {
+            this.tenantID = data._id
+            console.log(this.tenantID, data, data._id)
+        });
     }
 
     evaluateMessage(msg, callback) {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         msg = msg.toLowerCase()
-        this.http.get(this.API_ENDPOINT + this.tenantID + '/conversation?msg=' + msg, headers)
+        this.http.get(this.BOT_ENDPOINT + this.tenantID + '/conversation?msg=' + msg, headers)
             .map(res => res.json()).subscribe(data => {
 
                 if (data.intent === "No_Intent") {
