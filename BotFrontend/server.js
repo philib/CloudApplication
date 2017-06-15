@@ -1,10 +1,14 @@
-var express = require('express'),
-    app = express();
-app.use(express.static('www'));
+var express = require('express');
 var path = require('path');
-
 var request = require('request');
-app.set('tenant', process.env.BOT_TENANT || 'http://localhost:8082');
+var config = require('config');
+
+app = express();
+app.use(express.static('www'));
+
+app.set('tenant', config.get('BotService_Endpoint') || 'http://localhost:8082');
+console.log("is config active?", config.get('BotService_Endpoint'))
+
 app.get('/:tenantId', function (req, res) {
     var test = req.params.tenantId;
     var url = app.get('tenant')
