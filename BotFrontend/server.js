@@ -8,6 +8,7 @@ var request = require('request');
 app.get('/:tenantId', function (req, res) {
     var test = req.params.tenantId;
     console.log(test)
+	console.log("tenant bla: ", process.env.TENANT_BLA)
     //TODO gibts diese tenantID? Falls ja sendfile, falls nein redirect zu google.com
     request('http://localhost:8082/tenants?name='+test, function (error, response, body) {
         if (!error && response.statusCode == 200) {
