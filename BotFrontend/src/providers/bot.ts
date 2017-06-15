@@ -7,12 +7,14 @@ declare let window:any;
 @Injectable()
 export class Bot {
 
-    private BOT_ENDPOINT = "http://localhost:8083/"
-    private TENANT_ENDPOINT = "http://localhost:8082/"
+    private BOT_ENDPOINT = process.env.BOT_ENDPOINT || "http://localhost:8083/"
+    private TENANT_ENDPOINT = process.env.TENANT_ENDPOINT || "http://localhost:8082/"
 
     public tenantID;
 
     constructor(public http: Http) {
+        console.log("BOT_ENDPOINT", this.BOT_ENDPOINT);
+        console.log("TENANT_ENDPOINT", this.TENANT_ENDPOINT);
         this.tenantID = window.location.pathname.substr(1) || 'audi';
         let headers = new Headers({ 'Content-Type': 'application/json' });
         this.http.get(this.TENANT_ENDPOINT + 'tenants?name=' + this.tenantID, headers).map(res => res.json()).subscribe(data => {

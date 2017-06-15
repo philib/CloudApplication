@@ -4,12 +4,13 @@ app.use(express.static('www'));
 var path = require('path');
 
 var request = require('request');
-
+app.set('tenant', process.env.BOT_TENANT || 'http://localhost:8082');
 app.get('/:tenantId', function (req, res) {
     var test = req.params.tenantId;
-    console.log(test)
+    var url = app.get('tenant')
+    console.log("Express endpoint: ",url)
     //TODO gibts diese tenantID? Falls ja sendfile, falls nein redirect zu google.com
-    request('http://localhost:8082/tenants?name='+test, function (error, response, body) {
+    request(url+'/tenants?name='+test, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             res.sendFile(path.join(__dirname + '/www/assets/foo.html'));
         }else {
