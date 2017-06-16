@@ -7,6 +7,7 @@ import {RepairServicePage} from "../repair-service/repair-service";
 import {ResellerPage} from "../reseller/reseller";
 import {BaseUrl} from "../../providers/baseUrl";
 import {Http} from "@angular/http";
+import {BillPage} from "../bill/bill";
 
 /*
  Generated class for the Tabs page.
@@ -27,6 +28,7 @@ export class TabsPage {
   tab3Root = NewsPage;
   tab4Root = RepairServicePage;
   tab5Root = ResellerPage;
+  tab6Root = BillPage;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public baseUrl: BaseUrl, public http: Http) {

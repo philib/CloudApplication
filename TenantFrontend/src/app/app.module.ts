@@ -18,6 +18,7 @@ import {AddRepairServicePage} from "../pages/add-repair-service/add-repair-servi
 import {RepairServiceDetailPage} from "../pages/repair-service-detail/repair-service-detail";
 import {AddResellerPage} from "../pages/add-reseller/add-reseller";
 import {ResellerDetailPage} from "../pages/reseller-detail/reseller-detail";
+import {BillPage} from "../pages/bill/bill";
 
 @NgModule({
     declarations: [
@@ -34,7 +35,8 @@ import {ResellerDetailPage} from "../pages/reseller-detail/reseller-detail";
         AddRepairServicePage,
         RepairServiceDetailPage,
         AddResellerPage,
-        ResellerDetailPage
+        ResellerDetailPage,
+        BillPage
 
     ],
     imports: [
@@ -55,7 +57,8 @@ import {ResellerDetailPage} from "../pages/reseller-detail/reseller-detail";
         AddRepairServicePage,
         RepairServiceDetailPage,
         AddResellerPage,
-        ResellerDetailPage
+        ResellerDetailPage,
+        BillPage
 
 
     ],
