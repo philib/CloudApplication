@@ -5,6 +5,8 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var config = require('config');
 
+var port = process.env.PORT || 8082;
+
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, OPTIONS, DELETE");
@@ -29,7 +31,7 @@ app.get('/', function (req, res) {
 });
 swagger.configureSwaggerPaths('', 'api-docs', '');
 var domain = 'localhost';
-var applicationUrl = 'http://' + domain + ':' + 8080;
+var applicationUrl = 'http://' + domain + ':' + port;
 swagger.configure(applicationUrl, '1.0.0');
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -51,7 +53,7 @@ conn.on('error', console.error.bind(console, 'connection error:'));
 
 conn.once('open', function() {
     // Wait for the database connection to establish, then start the app.
-    var server = app.listen(8082, function () {
+    var server = app.listen(port, function () {
         var host = server.address().address;
         var port = server.address().port;
 

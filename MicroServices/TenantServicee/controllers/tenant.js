@@ -1,7 +1,7 @@
 var express = require('express');
 var tenantModel = require('../models/tenant');
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 var config = require('config');
 var jwt    = require('jsonwebtoken')
 
