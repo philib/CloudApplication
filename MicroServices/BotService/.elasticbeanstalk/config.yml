@@ -1,0 +1,21 @@
+branch-defaults:
+  default:
+    environment: BotService-dev
+    group_suffix: null
+environment-defaults:
+  BotService-dev:
+    branch: null
+    repository: null
+global:
+  application_name: BotService
+  branch: null
+  default_ec2_keyname: null
+  default_platform: node.js
+  default_region: eu-central-1
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: null
+  repository: null
+  sc: null
+  workspace_type: Application
