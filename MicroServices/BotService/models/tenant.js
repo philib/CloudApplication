@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var bcrypt = require('bcrypt');
 
 var Company = {
     name: String,
@@ -52,12 +51,6 @@ TenantSchema.pre('save', function (next) {
         this.created = currentDate;
     }
     this.updated = currentDate;
-
-    bcrypt.hash(this.password, 10, function (err, hash) {
-        if (err) return next(err);
-        user.password = hash;
-        next();
-    });
 });
 
 module.exports = mongoose.model('Tenant', TenantSchema);
