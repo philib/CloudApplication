@@ -17,7 +17,7 @@ app.use(function (req, res, next) {
 var subpath = express();
 app.use("/v1", subpath);
 var swagger = require('swagger-node-express').createNew(subpath);
-app.use('/swagger', express.static('public'));
+app.use(express.static('public'));
 swagger.setApiInfo({
     title: "example API",
     description: "API to do something, manage something...",
