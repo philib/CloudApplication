@@ -24,8 +24,10 @@
 </ion-header>
 
 <ion-content padding>
-
     <ion-list [hidden]="!isOnEdit">
+        <ion-item>
+            <button ion-button [style.background-color]="this.navParams.data.tenant.configuration.color"> Color </button>
+        </ion-item>
         <ion-item>
             <ion-label stacked>Company Name</ion-label>
             <ion-label>{{this.navParams.data.tenant.name}}</ion-label>
@@ -47,6 +49,10 @@
 
 
     <ion-list [hidden]="isOnEdit">
+        <div padding>
+            <p>Color</p>
+            <input #picker id="picker" class="color-input"/>
+        </div>
 
         <ion-item>
             <ion-label floating>Company Name</ion-label>
@@ -60,7 +66,7 @@
 
 
         <ion-item>
-           <ion-label floating>Bot Url</ion-label>
+            <ion-label floating>Bot Url</ion-label>
             <ion-input type="text" value="{{this.navParams.data.tenant.name}}" text-left></ion-input>
             <!-- //TODO: ION ".herokuapp.com" -->
         </ion-item>
