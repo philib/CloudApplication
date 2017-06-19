@@ -17,6 +17,7 @@ var TenantSchema = new Schema({
     name: {type: String, unique: true},
     password: String,
     configuration: {
+        color: String,
         bot_url: String,
         logo: String,
         botName: String,
