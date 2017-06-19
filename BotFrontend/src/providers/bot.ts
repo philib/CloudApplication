@@ -15,10 +15,14 @@ export class Bot {
 
     constructor(public http: Http) {
 
-        this.http.get('/assets/default.json').map(res => res.json()).subscribe(data => {
+        this.http.get('/assets/config/default.json').map(res => res.json()).subscribe(data => {
+            console.log(data)
             this.BOT_ENDPOINT = data.BotService_Endpoint;
             this.TENANT_ENDPOINT = data.TenantService_Endpoint;
             this.tenantID = window.location.pathname.substr(1) || 'audi';
+            if( this.tenantID.substr(this.tenantID.length-1) == '/') {
+                this.tenantID = this.tenantID.substr(0, this.tenantID.length - 1)
+            }
             let headers = new Headers({'Content-Type': 'application/json'});
             this.http.get(this.TENANT_ENDPOINT + 'tenants?name=' + this.tenantID, headers).map(res => res.json()).subscribe(data => {
                 this.tenantID = data._id

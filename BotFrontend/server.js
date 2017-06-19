@@ -6,9 +6,9 @@ var config = require('./src/assets/config/default.json');
 app = express();
 app.use(express.static('www'));
 
-app.get('/assets*', function (req, res) {
-            return res.redirect('/')
-})
+// app.get('/assets*', function (req, res) {
+//             return res.redirect('/')
+// })
 
 app.get('/:tenantId', function (req, res) {
     var test = req.params.tenantId;
