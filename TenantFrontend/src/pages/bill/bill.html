@@ -5,26 +5,46 @@
   Ionic pages and navigation.
 -->
 
-  <ion-header>
+<ion-header>
     <ion-toolbar>
-      <ion-title>Bill</ion-title>
+        <ion-title>Bill</ion-title>
     </ion-toolbar>
-  </ion-header>
-
+</ion-header>
 
 
 <ion-content padding>
-  <ion-list>
-  <ion-item no-lines>
-    <h2>Total Bot Usage</h2>
-    <p>{{navParams.data.tenant.configuration.chatHistory.length}} Times</p>
-  </ion-item>
-    <ion-item no-lines>
-      <h2>Price</h2>
-      <p>{{navParams.data.tenant.configuration.chatHistory.length * 0.50}} €</p>
-    </ion-item>
-    <div padding>
-      <button ion-button color="primary" block (click)="pay()">Pay Now</button>
-    </div>
-  </ion-list>
+
+    <ion-list>
+        <h3>Statistics</h3>
+
+        <ion-item no-lines>
+            Total Bot Usage : {{navParams.data.tenant.configuration.chatHistory.length}} Times
+        </ion-item>
+
+        <h3>Calls to each Service</h3>
+
+        <ion-item no-lines>
+            News : {{Intent_News}} Times <br>
+            CarWorkshop : {{Intent_CarWorkshop}} Times<br>
+            CarRetailer : {{Intent_CarRetailer}} Times<br>
+            CarTypes : {{Intent_CarTypes}} Times<br>
+            No_Intent : {{No_Intent}} Times<br>
+        </ion-item>
+
+
+        <ion-item no-lines>
+        </ion-item>
+
+    </ion-list>
+    <ion-list>
+
+        <ion-item no-lines>
+            <h2>Price</h2>
+            <p>{{navParams.data.tenant.configuration.chatHistory.length * 0.50}} €</p>
+        </ion-item>
+        <div padding>
+            <button ion-button color="primary" block (click)="pay()">Pay Now</button>
+        </div>
+    </ion-list>
+
 </ion-content>
