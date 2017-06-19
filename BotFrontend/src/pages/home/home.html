@@ -1,10 +1,10 @@
 <ion-header #chatContent id="chatContent">
-        <h2 center style="text-align:center">Welcome to {{chatbotName}} Bot</h2>
+        <h2 center style="text-align:center">Welcome to {{botData?.name}} Bot</h2>
 </ion-header>
 
-<ion-content padding class="has-footer has-header">
+<ion-content #content padding class="has-footer has-header">
         <ion-list #list>
-            <ion-item text-wrap ngClass="{{msg.from}}" *ngFor="let msg of chat">
+            <ion-item text-wrapa ngClass="{{msg.from}}" *ngFor="let msg of chat">
                 <ion-spinner text-center id="spinner" *ngIf="!msg.msg" name="bubbles"></ion-spinner>
                 <div [innerHTML]="msg.msg"></div>
             </ion-item>

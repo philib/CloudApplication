@@ -10,10 +10,9 @@ import {ViewChild} from "@angular/core";
 })
 export class HomePage {
     @ViewChild('chatContent') chatContent;
-    private chatbotName = "" //TODO get this from env variable from heroku so we can display different names on header
+    public botData;
     public chat = [];
     public chatMessage = "";
-
     @ViewChild('content') content;
     constructor(public bot: Bot, public navCtrl: NavController, public renderer: Renderer) {
     }
@@ -22,7 +21,12 @@ export class HomePage {
         this.bot.watchBot().subscribe(bot =>{
             console.log(bot)
             this.renderer.setElementStyle(this.chatContent.nativeElement, 'background-color', bot.configuration.color)
-            this.chatbotName = bot.name;
+            this.botData = bot;
+            this.chat.push({
+                msg: "Hello my name is "+ this.botData.name +", how can i help you?",
+                from: "bot",
+                color: bot.configuration.color
+            })
         })
     }
 
@@ -37,7 +41,8 @@ export class HomePage {
 
             let botMsg = {
                 msg: null,
-                from: "bot"
+                from: "bot",
+                color: this.botData.color
             };
 
             this.chat.push(botMsg);
