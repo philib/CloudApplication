@@ -1,0 +1,17 @@
+branch-defaults:
+  default:
+    environment: BotFrontend-dev
+    group_suffix: null
+global:
+  application_name: BotFrontend
+  branch: null
+  default_ec2_keyname: null
+  default_platform: node.js
+  default_region: eu-central-1
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: null
+  repository: null
+  sc: null
+  workspace_type: Application
