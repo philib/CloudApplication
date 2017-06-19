@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Renderer} from '@angular/core';
 
 import {NavController} from 'ionic-angular';
 import {Bot} from "../../providers/bot";
@@ -9,14 +9,21 @@ import {ViewChild} from "@angular/core";
     templateUrl: 'home.html'
 })
 export class HomePage {
-
+    @ViewChild('chatContent') chatContent;
     private chatbotName = "" //TODO get this from env variable from heroku so we can display different names on header
     public chat = [];
     public chatMessage = "";
 
     @ViewChild('content') content;
-    constructor(public bot: Bot, public navCtrl: NavController) {
+    constructor(public bot: Bot, public navCtrl: NavController, public renderer: Renderer) {
+    }
 
+    ionViewDidLoad(){
+        this.bot.watchBot().subscribe(bot =>{
+            console.log(bot)
+            this.renderer.setElementStyle(this.chatContent.nativeElement, 'background-color', bot.configuration.color)
+            this.chatbotName = bot.name;
+        })
     }
 
     sendMessage() {

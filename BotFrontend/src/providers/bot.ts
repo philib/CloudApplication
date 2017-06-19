@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {Config} from '../../config/default.json'
+import {Observable} from "rxjs";
 
 declare let window: any;
 
@@ -12,8 +13,16 @@ export class Bot {
     private TENANT_ENDPOINT;
 
     public tenantID;
+    public tenant;
+
+    private bot;
+    private botObserver;
 
     constructor(public http: Http) {
+
+        this.bot = Observable.create(observer => {
+            this.botObserver = observer;
+        }).share();
 
         this.http.get('/assets/config/default.json').map(res => res.json()).subscribe(data => {
             console.log(data)
@@ -26,8 +35,14 @@ export class Bot {
             let headers = new Headers({'Content-Type': 'application/json'});
             this.http.get(this.TENANT_ENDPOINT + 'tenants?name=' + this.tenantID, headers).map(res => res.json()).subscribe(data => {
                 this.tenantID = data._id
+                this.tenant = data;
+                this.botObserver.next(data);
             });
         })
+    }
+
+    watchBot(){
+        return this.bot;
     }
 
     evaluateMessage(msg, callback) {
