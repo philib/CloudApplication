@@ -3,7 +3,7 @@ node_js:
 - node
 - '7'
 before_deploy:
-  zip --quiet -r "BotFrontend/--$TRAVIS_BRANCH--$TRAVIS_BUILD_NUMBER--$(date '+%Y-%m-%d--%H-%M-%S').zip" BotFrontend
+  zip --quiet -r "BotFrontend/--$TRAVIS_BRANCH--$TRAVIS_BUILD_NUMBER--$(date '+%Y-%m-%d--%H-%M-%S').zip" BotFrontend.zip
 
 deploy:
   provider: elasticbeanstalk
@@ -15,3 +15,4 @@ deploy:
   env: "example-app-environment"
   bucket_name: "the-target-S3-bucket"
   skip_cleanup: true
+  zip_file: BotFrontend.zip
