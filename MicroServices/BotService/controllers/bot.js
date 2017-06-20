@@ -38,6 +38,14 @@ exports.answer = function (req, res, next) {
         }
     };
 
+    if(msg==="test"){
+        response.msg = "test accepted"
+        response.data = null;
+        response.intent = "Test_Intent";
+
+        return res.json(response)
+    }
+
     lex.postText(params, function (err, data) {
         if (err){
             console.log(err, err.stack);
