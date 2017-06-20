@@ -1,7 +1,6 @@
-import {Injectable} from '@angular/core';
-import {Http, Headers} from '@angular/http';
-import 'rxjs/add/operator/map';
-import {Config} from '../../config/default.json'
+import {Injectable} from "@angular/core";
+import {Headers, Http} from "@angular/http";
+import "rxjs/add/operator/map";
 import {Observable} from "rxjs";
 
 declare let window: any;
@@ -29,7 +28,7 @@ export class Bot {
             this.BOT_ENDPOINT = data.BotService_Endpoint;
             this.TENANT_ENDPOINT = data.TenantService_Endpoint;
             this.tenantID = window.location.pathname.substr(1) || 'audi';
-            if( this.tenantID.substr(this.tenantID.length-1) == '/') {
+            if (this.tenantID.substr(this.tenantID.length - 1) == '/') {
                 this.tenantID = this.tenantID.substr(0, this.tenantID.length - 1)
             }
             let headers = new Headers({'Content-Type': 'application/json'});
@@ -41,7 +40,7 @@ export class Bot {
         })
     }
 
-    watchBot(){
+    watchBot() {
         return this.bot;
     }
 
@@ -63,31 +62,76 @@ export class Bot {
                 callback(this.transformCarWorkshop(data))
             } else if (data.intent === "Intent_CarTypes") {
                 callback(this.transformCarTypes(data))
+            } else if (data.intent === "Intent_Help") {
+                callback(this.transformCarHelp(data))
             }
+
         })
     }
 
     transformNews(data) {
-        let m = "here are the news<br>"
-        data.data.map(x => m += "<br><b>" + x.title + "</b><br>" + x.description + "<br>")
-        return m
+        let l = data.data.length
+        if (l == 0) {
+            let m = "There is no news available<br>"
+            return m
+        } else {
+            let m = "here are the news<br>"
+            data.data.map(x => m += "<br><b>" + x.title + "</b><br>" + x.description + "<br>")
+            return m
+        }
+
     }
 
     transformCarRetailer(data) {
-        let m = "You can aquire our cars here:<br><br>"
-        data.data.map(x => m += "<b>" + x.name + "</b><br>" + x.address + "<br>")
-        return m
+        let l = data.data.length
+        if (l == 0) {
+            let m = "There is no retailer available<br>"
+            return m
+        } else {
+            let m = "You can aquire our cars here:<br><br>"
+            data.data.map(x => m += "<b>" + x.name + "</b><br>" + x.address + "<br>")
+            return m
+        }
     }
 
     transformCarWorkshop(data) {
-        let m = "You can find our workshops here:<br>"
-        data.data.map(x => m += "<br><b>" + x.name + "</b><br>" + x.address + "<br>")
-        return m
+        let l = data.data.length
+        if (l == 0) {
+            let m = "There is no workshops available<br>"
+            return m
+        } else {
+            let m = "You can find our workshops here:<br>"
+            data.data.map(x => m += "<br><b>" + x.name + "</b><br>" + x.address + "<br>")
+            return m
+        }
     }
 
     transformCarTypes(data) {
-        let m = "following cars are currently available:<br>"
-        data.data.map(x => m += "<br><b>" + x.name + "</b><br>" + x.description + "<br>")
+        let l = data.data.length
+        if (l == 0) {
+            let m = "There is no cars available<br>"
+            return m
+        } else {
+            let m = "following cars are currently available:<br>"
+            data.data.map(x => m += "<br><b>" + x.name + "</b><br>" + x.description + "<br>")
+            return m
+        }
+    }
+
+    transformCarHelp(data) {
+        let name = data.data === "" || typeof data.data === 'undefined' ? "ChaBot" : data.data
+        let m = "----- Help -----<br>I am " + name + "!" +
+            "<br>I can give you information about:<br>" +
+            "<ul>" +
+            "<li>Cars</li>" +
+            "<li>News</li>" +
+            "<li>Reseller</li>" +
+            "<li>Workshops</li>" +
+            "</ul>" +
+            "If you want to know just write something like \"give me some news\" or \"which cars do you have?\"."
+            + "<br>" +
+            "I Hope I can help you!<br>"
         return m
+
     }
 }

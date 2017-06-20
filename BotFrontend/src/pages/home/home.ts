@@ -1,8 +1,5 @@
-import {Component, Renderer} from '@angular/core';
-
-import {NavController} from 'ionic-angular';
+import {Component, Renderer, ViewChild} from "@angular/core";
 import {Bot} from "../../providers/bot";
-import {ViewChild} from "@angular/core";
 
 @Component({
     selector: 'page-home',
@@ -14,11 +11,12 @@ export class HomePage {
     public chat = [];
     public chatMessage = "";
     @ViewChild('content') content;
-    constructor(public bot: Bot, public navCtrl: NavController, public renderer: Renderer) {
+
+    constructor(public bot: Bot, public renderer: Renderer) {
     }
 
-    ionViewDidLoad(){
-        this.bot.watchBot().subscribe(bot =>{
+    ionViewDidLoad() {
+        this.bot.watchBot().subscribe(bot => {
             console.log(bot)
             this.renderer.setElementStyle(this.chatContent.nativeElement, 'background-color', bot.configuration.color)
             this.botData = bot;
@@ -55,14 +53,14 @@ export class HomePage {
         }
     }
 
-    scrollToBottom(){
-        setTimeout(()=>{
+    scrollToBottom() {
+        setTimeout(() => {
             this.content.scrollToBottom();//300ms animation speed
-        },100)
+        }, 100)
     }
 
-    eventHandler(keycode){
-        if(keycode == 13 && this.chatMessage.length > 0){
+    eventHandler(keycode) {
+        if (keycode == 13 && this.chatMessage.length > 0) {
             this.sendMessage();
         }
     }

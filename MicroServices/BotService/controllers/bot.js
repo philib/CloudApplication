@@ -9,6 +9,7 @@ var intent_News = "Intent_News"
 var intent_CarWorkshop = "Intent_CarWorkshop"
 var intent_CarRetailer = "Intent_CarRetailer"
 var intent_CarTypes = "Intent_CarTypes"
+var intent_Help = "Intent_Help"
 
 var lex = new lexruntime({
     endpoint: 'https://runtime.lex.us-east-1.amazonaws.com',
@@ -63,6 +64,10 @@ exports.answer = function (req, res, next) {
                     response.msg = "";
                     response.data = configuration.reseller;
                     response.intent = intent_CarRetailer;
+                }else if(data.intentName === intent_Help){
+                    response.msg = "";
+                    response.data = configuration.botName;
+                    response.intent = intent_Help;
                 }
                 var history = {
                     sessionToken: "",
@@ -87,4 +92,3 @@ var saveConversation = function (tenantId, history) {
     tenantModel.update({_id: tenantId}, {$addToSet: {'configuration.chatHistory': history}}, function (err, result) {
     })
 }
-
