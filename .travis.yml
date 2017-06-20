@@ -1,12 +1,12 @@
 language: node_js
 node_js:
 - node
-- '7'
+- '6'
 
 install:
-- cd BotFrontend && npm install && cd ..
+  - cd BotFrontend && npm install && cd ..
 before_deploy:
-  zip --quiet -r "BotFrontend/--$TRAVIS_BRANCH--$TRAVIS_BUILD_NUMBER--$(date '+%Y-%m-%d--%H-%M-%S').zip" BotFrontend.zip
+  - zip --quiet -r "BotFrontend/--$TRAVIS_BRANCH--$TRAVIS_BUILD_NUMBER--$(date '+%Y-%m-%d--%H-%M-%S').zip" BotFrontend.zip
 
 deploy:
  - provider: elasticbeanstalk
