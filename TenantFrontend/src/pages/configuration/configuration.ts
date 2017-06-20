@@ -19,13 +19,11 @@ export class ConfigurationPage {
     isOnEdit = true;
 
     constructor(public http: Http, public baseUrl: BaseUrl, public navCtrl: NavController, public navParams: NavParams) {
-        if (!this.navParams.data.tenant.hasOwnProperty('botName')) {
-            this.navParams.data.tenant.batName = "";
-        }
-        if (!this.navParams.data.tenant.hasOwnProperty('botName')) {
-            this.navParams.data.tenant.batName = "";
+        if (!this.navParams.data.tenant.configuration.hasOwnProperty('botName')) {
+            this.navParams.data.tenant.configuration.botName = ""
         }
         console.log(this.navParams.data.tenant.name)
+        console.log(this.navParams.data.tenant.configuration.botName)
     }
 
     ionViewDidLoad() {
@@ -60,6 +58,7 @@ export class ConfigurationPage {
         this.http.put(url, this.navParams.data.tenant.configuration).map(res => res.json())
             .subscribe(data => {
                     this.changeEditState()
+                    this.navParams.data = data
                 },
                 error => {
                 });

@@ -29,16 +29,16 @@
             <button ion-button [style.background-color]="this.navParams.data.tenant.configuration.color"> Color </button>
         </ion-item>
         <ion-item>
-            <ion-label stacked>Company Name</ion-label>
-            <ion-label>{{this.navParams.data.tenant.name}}</ion-label>
+            <h2>Company Name</h2>
+            <p>{{this.navParams.data.tenant.name}}</p>
         </ion-item>
         <ion-item>
-            <ion-label stacked>Bot Name</ion-label>
-            <ion-label>{{this.navParams.data.tenant.name}}</ion-label>
+            <h2>Bot Name</h2>
+            <p>{{this.navParams.data.tenant.configuration.botName}}</p>
         </ion-item>
         <ion-item>
-            <ion-label stacked>Bot Url</ion-label>
-            <ion-label>{{this.navParams.data.tenant.name}}</ion-label>
+            <h2>Bot Url</h2>
+            <p>{{this.navParams.data.tenant.configuration.bot_url}}</p>
         </ion-item>
 
         <ion-item no-lines>
@@ -55,21 +55,10 @@
         </div>
 
         <ion-item>
-            <ion-label floating>Company Name</ion-label>
-            <ion-input type="text" value="{{this.navParams.data.tenant.name}}"></ion-input>
+            <ion-label floating>Bot Name</ion-label>
+            <ion-input type="text" value="{{this.navParams.data.tenant.configuration.botName}}"></ion-input>
         </ion-item>
 
-        <ion-item>
-            <ion-label floating>Bot name</ion-label>
-            <ion-input type="text" value="{{this.navParams.data.tenant.name}}"></ion-input>
-        </ion-item>
-
-
-        <ion-item>
-            <ion-label floating>Bot Url</ion-label>
-            <ion-input type="text" value="{{this.navParams.data.tenant.name}}" text-left></ion-input>
-            <!-- //TODO: ION ".herokuapp.com" -->
-        </ion-item>
     </ion-list>
 
 </ion-content>
