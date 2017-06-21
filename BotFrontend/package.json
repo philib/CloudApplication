@@ -9,7 +9,8 @@
     "build": "ionic-app-scripts build",
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
-    "test": "echo hello"
+    "test": "echo hello",
+    "aws": "npm rebuild node-sass && npm start"
   },
   "config": {
     "ionic_bundler": "webpack",

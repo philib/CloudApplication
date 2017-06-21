@@ -1,7 +1,7 @@
 var express = require('express');
 var path = require('path');
 var request = require('request');
-var config = require('./src/assets/config/default.json');
+var config = require('./www/assets/config/default.json');
 
 app = express();
 app.use(express.static('www'));

@@ -6,7 +6,7 @@ var copyWebPackPlugin =require('copy-webpack-plugin')
 const build = process.env.NODE_ENV
 var configFile = 'dev.json'
 
-if(build == 'prod'){
+if(build === 'prod'){
   console.log('using production config')
   configFile = 'prod.json'
 }
