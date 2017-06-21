@@ -5,6 +5,9 @@ var bcrypt = require('bcryptjs');
 var config = require('config');
 var jwt = require('jsonwebtoken')
 
+var jwt_secret = process.env.CONF_JWT || config.JWTSecret
+
+
 exports.register = function (req, res, next) {
     var tenant = new tenantModel();
     tenant.name = req.body.name;
@@ -26,7 +29,7 @@ exports.login = function (req, res, next) {
         if (err) return next(err);
         bcrypt.compare(password, data.password).then(function (success) {
             if (success) {
-                var token = jwt.sign(data, config.JWTSecret, {
+                var token = jwt.sign(data, jwt_secret, {
                     expiresIn: "365d" // expires after 1 year
                 });
                 return res.json({
