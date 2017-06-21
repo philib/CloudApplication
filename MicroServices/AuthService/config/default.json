@@ -1,0 +1,5 @@
+{
+  "DB_ENDPOINT": "url to my mongo db",
+  "JWTSecret" : "mySecret",
+  "PORT" : "8081"
+}
