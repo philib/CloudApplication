@@ -5,7 +5,7 @@ var bcrypt = require('bcryptjs');
 var config = require('config');
 var jwt = require('jsonwebtoken')
 
-var jwt_secret = process.env.CONF_JWT || config.JWTSecret
+var jwt_secret = process.env.JWT_SECRET || config.JWTSecret
 
 
 exports.register = function (req, res, next) {
