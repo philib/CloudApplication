@@ -1,7 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
 var ionicWebpackFactory = require(process.env.IONIC_WEBPACK_FACTORY);
-var copyWebPackPlugin =require('copy-webpack-plugin')
+var copyWebPackPlugin = require('copy-webpack-plugin')
+const WebpackShellPlugin = require('webpack-shell-plugin');
 
 const build = process.env.NODE_ENV
 var configFile = 'dev.json'
@@ -12,7 +13,7 @@ if(build === 'prod'){
 }
 
 module.exports = {
-
+  context: path.join(__dirname, ''),
   entry: process.env.IONIC_APP_ENTRY_POINT,
   output: {
     path: '{{BUILD}}',
@@ -42,8 +43,9 @@ module.exports = {
 
   plugins: [
     ionicWebpackFactory.getIonicEnvironmentPlugin(),
-    new copyWebPackPlugin([
-        {from: 'config/'+configFile, to: '../assets/config/default.json' }])
+      new WebpackShellPlugin({
+          onBuildEnd: ['cp config/'+configFile +' www/assets/config/default.json']
+      })
   ],
 
   // Some libraries import Node modules but don't use them in the browser.
