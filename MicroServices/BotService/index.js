@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var config = require('config');
 
 var port = process.env.PORT || 8083;
-
+var db_endpoint = process.env.DB_ENDPOINT || config.DB_ENDPOINT
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, OPTIONS, DELETE");
@@ -46,7 +46,7 @@ var options = {
     replset: {socketOptions: {keepAlive: 300000, connectTimeoutMS: 30000}}
 };
 
-mongoose.connect(process.env.DB_ENDPOINT || config.DB_ENDPOINT, options);
+mongoose.connect(process.env.DB_ENDPOINT || db_endpoint, options);
 var conn = mongoose.connection;
 
 conn.on('error', console.error.bind(console, 'connection error:'));
