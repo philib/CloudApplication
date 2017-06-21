@@ -1,0 +1,4 @@
+{
+  "DB_ENDPOINT": "my db endpoint",
+  "JWTSecret" : "jwt secret token"
+}

@@ -1,6 +1,7 @@
 var jwt = require('jsonwebtoken')
 var config = require('config');
 
+var jwt_secret = process.env.JWT_SECRET || config.JWTSecret
 exports.isAuthenticated = function (req, res, next) {
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
     var tenantId = req.params.tenantId;
@@ -8,7 +9,7 @@ exports.isAuthenticated = function (req, res, next) {
     // decode token
     if (token) {
         // verifies secret and checks exp
-        jwt.verify(token, config.JWTSecret, function (err, decoded) {
+        jwt.verify(token, jwt_secret, function (err, decoded) {
             if (err) {
                 return res.status(401).json({success: false, message: 'Failed to authenticate tokens.'});
             } else {
