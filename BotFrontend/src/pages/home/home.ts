@@ -17,14 +17,25 @@ export class HomePage {
 
     ionViewDidLoad() {
         this.bot.watchBot().subscribe(bot => {
-            console.log(bot)
-            this.renderer.setElementStyle(this.chatContent.nativeElement, 'background-color', bot.configuration.color)
+            console.log("Bot",bot)
+            let color = bot.configuration.color;
+            if(!color){
+               color = "#32db64"
+            }
+            console.log("color", color)
+            this.renderer.setElementStyle(this.chatContent.nativeElement, 'background-color', color)
             this.botData = bot;
+            this.botData.configuration.color = color;
             this.chat.push({
                 msg: "Hello my name is "+ this.botData.name +", how can i help you?",
                 from: "bot",
-                color: bot.configuration.color
+                color: color
             })
+
+            setTimeout(() => {
+                this.style();
+            }, 10)
+
         })
     }
 
@@ -50,6 +61,10 @@ export class HomePage {
             });
             this.chatMessage = "";
             this.scrollToBottom();
+
+            setTimeout(() => {
+                this.style();
+            }, 10)
         }
     }
 
@@ -57,6 +72,16 @@ export class HomePage {
         setTimeout(() => {
             this.content.scrollToBottom();//300ms animation speed
         }, 100)
+    }
+
+    style() {
+        var chatlist = document.getElementsByClassName('bot')
+
+        for (var i = 0; i < chatlist.length; ++i) {
+            var item = chatlist[i];
+            item.setAttribute('style', "background-color:"+this.botData.configuration.color || 'green' )
+            console.log("item", item)
+        }
     }
 
     eventHandler(keycode) {
