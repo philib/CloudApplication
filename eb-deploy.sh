@@ -26,9 +26,10 @@ if [ "${1}" = "tenantService" ]; then
 fi
 
 if [ "${1}" = "BotFrontend" ]; then
-    echo deploying TenantService
+    echo deploying BotFrontend
 	cd BotFrontend
 	npm install
+	npm run build
 	eb setenv NODE_ENV=prod
 	eb deploy
 fi
