@@ -25,25 +25,28 @@
 
 <ion-content padding>
     <ion-list [hidden]="!isOnEdit">
-        <ion-item>
-            <button ion-button [style.background-color]="this.navParams.data.tenant.configuration.color"> Color </button>
-        </ion-item>
+
         <ion-item>
             <h2>Company Name</h2>
             <p>{{this.navParams.data.tenant.name}}</p>
         </ion-item>
-        <ion-item>
-            <h2>Bot Name</h2>
-            <p>{{this.navParams.data.tenant.configuration.botName}}</p>
-        </ion-item>
+        <!--<ion-item>-->
+            <!--<h2>Bot Name</h2>-->
+            <!--<p>{{this.navParams.data.tenant.configuration.botName}}</p>-->
+        <!--</ion-item>-->
         <ion-item>
             <h2>Bot Url</h2>
             <p>{{this.navParams.data.tenant.configuration.bot_url}}</p>
         </ion-item>
 
-        <ion-item no-lines>
+        <ion-item>
             <h2>Total Bot Usage</h2>
             <p>{{navParams.data.tenant.configuration.chatHistory.length}} Times</p>
+        </ion-item>
+
+        <ion-item>
+            <h2>Current Bot color</h2>
+            <button ion-button [style.background-color]="this.navParams.data.tenant.configuration.color"> Color </button>
         </ion-item>
     </ion-list>
 
@@ -51,13 +54,13 @@
     <ion-list [hidden]="isOnEdit">
         <div padding>
             <p>Color</p>
-            <input #picker id="picker" class="color-input"/>
+            <input #picker id="picker" class="color-input" [(ngModel)]="this.navParams.data.tenant.configuration.color"/>
         </div>
 
-        <ion-item>
-            <ion-label floating>Bot Name</ion-label>
-            <ion-input type="text" value="{{this.navParams.data.tenant.configuration.botName}}"></ion-input>
-        </ion-item>
+        <!--<ion-item>-->
+            <!--<ion-label floating>Bot Name</ion-label>-->
+            <!--<ion-input [(ngModel)]="this.navParams.data.tenant.configuration.botName" type="text" value="{{this.navParams.data.tenant.configuration.botName}}"></ion-input>-->
+        <!--</ion-item>-->
 
     </ion-list>
 

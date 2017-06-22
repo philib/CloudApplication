@@ -5,7 +5,7 @@ var jwt_secret = process.env.JWT_SECRET || config.JWTSecret
 exports.isAuthenticated = function (req, res, next) {
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
     var tenantId = req.params.tenantId;
-
+console.log("test")
     // decode token
     if (token) {
         // verifies secret and checks exp
@@ -13,10 +13,10 @@ exports.isAuthenticated = function (req, res, next) {
             if (err) {
                 return res.status(401).json({success: false, message: 'Failed to authenticate tokens.'});
             } else {
+                console.log(decoded)
                 // if everything is good, save to request for use in other routes
-                if(decoded._doc._id === tenantId){
+                if(decoded._id === tenantId){
                     req.decoded = decoded;
-                    console.log(decoded._doc.name);
                     next();
                 }else {
                     return res.status(401).json({success: false, message: 'Failed to authenticate tokens.'});

@@ -4,7 +4,7 @@
 
 <ion-content #content padding class="has-footer has-header">
         <ion-list #list>
-            <ion-item text-wrapa ngClass="{{msg.from}}" *ngFor="let msg of chat">
+            <ion-item text-wrap ngClass="{{msg.from}}" *ngFor="let msg of chat">
                 <ion-spinner text-center id="spinner" *ngIf="!msg.msg" name="bubbles"></ion-spinner>
                 <div [innerHTML]="msg.msg"></div>
             </ion-item>

@@ -32,15 +32,10 @@
         </ion-item>
 
 
+        <h3>Billing</h3>
         <ion-item no-lines>
-        </ion-item>
-
-    </ion-list>
-    <ion-list>
-
-        <ion-item no-lines>
-            <h2>Price</h2>
-            <p>{{navParams.data.tenant.configuration.chatHistory.length * 0.50}} €</p>
+            <p>Price per bot call: $0.0009</p>
+            <p>Current price: ${{navParams.data.tenant.configuration.chatHistory.length * 0.0009}}</p>
         </ion-item>
         <div padding>
             <button ion-button color="primary" block (click)="pay()">Pay Now</button>
