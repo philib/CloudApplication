@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-source ./env
 
 if [ "${1}" = "authService" ]; then
     echo deploying AuthService

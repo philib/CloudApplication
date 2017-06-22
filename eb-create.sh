@@ -1,20 +1,15 @@
 #!/usr/bin/env bash
-source ./env
 
 if [ "${1}" = "authService" ]; then
 	cd MicroServices/AuthService
 	npm install
 	eb create AuthService-dev
-	eb setenv JWT_SECRET=$JWT_SECRET DB_ENDPOINT=$DB_ENDPOINT PORT=$AuthService_PORT
-
 fi
 
 if [ "${1}" = "botService" ]; then
 	cd MicroServices/BotService
 	npm install
-	eb create BotService-dev
-	eb setenv AWS_LEX_ACCESS=$AWS_LEX_ACCESS AWS_LEX_SECRET=$AWS_LEX_SECRET DB_ENDPOINT=$DB_ENDPOINT JWT_SECRET=$JWT_SECRET PORT=$BotService_PORT
-
+	eb create BotService-dev´
 fi
 
 if [ "${1}" = "tenantService" ]; then
@@ -22,18 +17,17 @@ if [ "${1}" = "tenantService" ]; then
 	npm install
 	eb setenv
 	eb create TenantService-dev
-	eb setenv DB_ENDPOINT=$DB_ENDPOINT JWT_SECRET=$JWT_SECRET PORT=$TenantService_PORT
-
 fi
 
 if [ "${1}" = "BotFrontend" ]; then
 	cd BotFrontend
 	npm install 
-	eb create BotFrontend-dev setenv NODE_ENV=prod
+	eb create BotFrontend-dev
+	
 fi
 
 if [ "${1}" = "TenantFrontend" ]; then
 	cd TenantFrontend
 	npm install 
-	eb create TenantFrontend-dev setenv NODE_ENV=prod
+	eb create TenantFrontend-dev
 fi
