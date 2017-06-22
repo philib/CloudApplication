@@ -15,7 +15,6 @@ fi
 if [ "${1}" = "tenantService" ]; then
 	cd MicroServices/TenantServicee
 	npm install
-	eb setenv
 	eb create TenantService-dev
 fi
 
