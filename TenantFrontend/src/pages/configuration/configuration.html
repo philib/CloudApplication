@@ -51,12 +51,12 @@
     <ion-list [hidden]="isOnEdit">
         <div padding>
             <p>Color</p>
-            <input #picker id="picker" class="color-input"/>
+            <input #picker id="picker" class="color-input" [(ngModel)]="this.navParams.data.tenant.configuration.color"/>
         </div>
 
         <ion-item>
             <ion-label floating>Bot Name</ion-label>
-            <ion-input type="text" value="{{this.navParams.data.tenant.configuration.botName}}"></ion-input>
+            <ion-input [(ngModel)]="this.navParams.data.tenant.configuration.botName" type="text" value="{{this.navParams.data.tenant.configuration.botName}}"></ion-input>
         </ion-item>
 
     </ion-list>

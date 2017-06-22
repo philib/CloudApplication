@@ -58,7 +58,6 @@ export class ConfigurationPage {
         this.http.put(url, this.navParams.data.tenant.configuration).map(res => res.json())
             .subscribe(data => {
                     this.changeEditState()
-                    this.navParams.data = data
                 },
                 error => {
                 });
