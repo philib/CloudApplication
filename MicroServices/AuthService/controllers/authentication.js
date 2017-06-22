@@ -29,7 +29,9 @@ exports.login = function (req, res, next) {
         if (err) return next(err);
         bcrypt.compare(password, data.password).then(function (success) {
             if (success) {
-                var token = jwt.sign(data, jwt_secret, {
+
+                var t = {_id: data._id, name: data.name};
+                var token = jwt.sign(t, jwt_secret, {
                     expiresIn: "365d" // expires after 1 year
                 });
                 return res.json({
