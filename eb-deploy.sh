@@ -32,5 +32,6 @@ if [ "${1}" = "tenantFrontend" ]; then
     echo deploying TenantFrontend
 	cd TenantFrontend
 	npm install
+	npm run build
 	eb deploy TenantFrontend-dev
 fi
