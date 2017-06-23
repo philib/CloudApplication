@@ -4,6 +4,8 @@ import {ViewChild} from "@angular/core/src/metadata/di";
 import {BaseUrl} from "../../providers/baseUrl";
 import {Http} from "@angular/http";
 declare let Huebee: any;
+declare var _BotFrontend_Endpoint: any
+
 /*
  Generated class for the Configuration page.
 
