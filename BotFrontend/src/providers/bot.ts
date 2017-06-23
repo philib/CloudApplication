@@ -4,6 +4,8 @@ import "rxjs/add/operator/map";
 import {Observable} from "rxjs";
 
 declare let window: any;
+declare const _BotService_Endpoint: any
+declare const _TenantService_Endpoint: any
 
 @Injectable()
 export class Bot {
@@ -23,22 +25,24 @@ export class Bot {
             this.botObserver = observer;
         }).share();
 
-        this.http.get('/assets/config/default.json').map(res => res.json()).subscribe(data => {
-            console.log(data)
-            this.BOT_ENDPOINT = data.BotService_Endpoint;
-            this.TENANT_ENDPOINT = data.TenantService_Endpoint;
-            this.tenantID = window.location.pathname.substr(1) || 'audi';
-            if (this.tenantID.substr(this.tenantID.length - 1) == '/') {
-                this.tenantID = this.tenantID.substr(0, this.tenantID.length - 1)
-            }
-            let headers = new Headers({'Content-Type': 'application/json'});
-            this.http.get(this.TENANT_ENDPOINT + 'tenants?name=' + this.tenantID, headers).map(res => res.json()).subscribe(data => {
-                this.tenantID = data._id
-                this.tenant = data;
-                this.botObserver.next(data);
-            });
-        })
+        this.BOT_ENDPOINT = _BotService_Endpoint
+        this.TENANT_ENDPOINT = _TenantService_Endpoint
+
+        if (_BotService_Endpoint === 'undefined') this.BOT_ENDPOINT = "http://localhost:5000/";
+        if (_TenantService_Endpoint === 'undefined') this.TENANT_ENDPOINT = "http://localhost:8082/"
+
+        this.tenantID = window.location.pathname.substr(1) || 'audi';
+        if (this.tenantID.substr(this.tenantID.length - 1) == '/') {
+            this.tenantID = this.tenantID.substr(0, this.tenantID.length - 1)
+        }
+        let headers = new Headers({'Content-Type': 'application/json'});
+        this.http.get(this.TENANT_ENDPOINT + 'tenants?name=' + this.tenantID, headers).map(res => res.json()).subscribe(data => {
+            this.tenantID = data._id
+            this.tenant = data;
+            this.botObserver.next(data);
+        });
     }
+
 
     watchBot() {
         return this.bot;

@@ -1,7 +1,8 @@
 var express = require('express');
 var path = require('path');
 var request = require('request');
-var config = require('./www/assets/config/default.json');
+
+var tenantService_endpoint = process.env.TENANTSERVICE_ENDPOINT || "http://localhost:8082/"
 
 app = express();
 app.use(express.static('www'));
@@ -12,9 +13,9 @@ app.get('/assets*', function (req, res) {
 
 app.get('/:tenantId', function (req, res) {
     var test = req.params.tenantId;
-    console.log("Express endpoint: ",config.TenantService_Endpoint)
+    console.log("Express endpoint: ",process.env.TENANTSERVICE_ENDPOINT || "http://localhost:8082/")
     //TODO gibts diese tenantID? Falls ja sendfile, falls nein redirect zu google.com
-    request(config.TenantService_Endpoint+'tenants?name='+test, function (error, response, body) {
+    request(tenantService_endpoint+'tenants?name='+test, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             return res.sendFile(path.join(__dirname + '/www/assets/foo.html'));
         }else {
