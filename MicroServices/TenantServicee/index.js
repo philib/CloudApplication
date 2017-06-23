@@ -35,6 +35,7 @@ var applicationUrl = 'http://' + domain + ':' + port;
 swagger.configure(applicationUrl, '1.0.0');
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser({limit: '50mb'}));
 app.use(bodyParser.json());
 app.use(routes);
 
