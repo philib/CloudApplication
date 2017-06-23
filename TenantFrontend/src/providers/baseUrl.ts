@@ -5,34 +5,41 @@ declare var _TenantService_Endpoint: any
 
 @Injectable()
 export class BaseUrl {
-  private baseUrlTenant =  _TenantService_Endpoint ? JSON.stringify(_TenantService_Endpoint) :"http://localhost:8082/";
-  private baseUrlAuth = _AuthService_Endpoint ? JSON.stringify(_AuthService_Endpoint) : "http://localhost:8081/";
+    private baseUrlTenant = _TenantService_Endpoint;
+    private baseUrlAuth = _AuthService_Endpoint;
 
-  constructor() {
-    console.log("_AuthService_Endpoint", _AuthService_Endpoint)
-    console.log("_TenantService_Endpoint", _TenantService_Endpoint)
-  }
+    constructor() {
+        console.log("_AuthService_Endpoint", _AuthService_Endpoint)
+        console.log("_TenantService_Endpoint", _TenantService_Endpoint)
 
-  getBaseUrl() {
-    return this.baseUrlTenant;
-  }
+        if (_TenantService_Endpoint === 'undefined') {
+            this.baseUrlTenant = "http://localhost:8082/";
+        }
+        if (_AuthService_Endpoint === 'undefined') {
+            this.baseUrlAuth = "http://localhost:8081/"
+        }
+    }
 
-  getTenantsUrl(){
-    return this.baseUrlTenant + "tenants/"
-  }
+    getBaseUrl() {
+        return this.baseUrlTenant;
+    }
 
-  getTenantsRegisterUrl(){
-    return this.baseUrlAuth  + "register/"
-  }
+    getTenantsUrl() {
+        return this.baseUrlTenant + "tenants/"
+    }
 
-  getTenantsLoginUrl(){
-    return this.baseUrlAuth+ "login/"
-  }
+    getTenantsRegisterUrl() {
+        return this.baseUrlAuth + "register/"
+    }
 
-  getTenantConfigurationUrl(tenantId , tenantToken){
-    return this.baseUrlTenant+ "tenants/"+tenantId+ "/"+ "configuration" + "?token="+tenantToken;
+    getTenantsLoginUrl() {
+        return this.baseUrlAuth + "login/"
+    }
 
-  }
+    getTenantConfigurationUrl(tenantId, tenantToken) {
+        return this.baseUrlTenant + "tenants/" + tenantId + "/" + "configuration" + "?token=" + tenantToken;
+
+    }
 
 
 }

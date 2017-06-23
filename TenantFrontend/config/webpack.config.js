@@ -37,8 +37,8 @@ module.exports = {
   plugins: [
     ionicWebpackFactory.getIonicEnvironmentPlugin(),
       new webpack.DefinePlugin({
-          _TenantService_Endpoint : TenantService_Endpoint,
-          _AuthService_Endpoint :AuthService_Endpoint
+          _TenantService_Endpoint : JSON.stringify(TenantService_Endpoint),
+          _AuthService_Endpoint : JSON.stringify(AuthService_Endpoint)
       })
   ],
 
