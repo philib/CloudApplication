@@ -19,13 +19,13 @@ if [ "${1}" = "tenantService" ]; then
 	eb setenv DB_ENDPOINT=$DB_ENDPOINT JWT_SECRET=$JWT_SECRET PORT=$TenantService_PORT
 fi
 
-if [ "${1}" = "BotFrontend" ]; then
+if [ "${1}" = "botFrontend" ]; then
     echo deploying BotFrontend
 	cd BotFrontend
 	eb setenv NODE_ENV=prod
 fi
 
-if [ "${1}" = "TenantFrontend" ]; then
+if [ "${1}" = "tenantFrontend" ]; then
     echo deploying TenantFrontend
 	cd TenantFrontend
 	eb setenv NODE_ENV=prod

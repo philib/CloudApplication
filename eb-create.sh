@@ -18,14 +18,14 @@ if [ "${1}" = "tenantService" ]; then
 	eb create TenantService-dev
 fi
 
-if [ "${1}" = "BotFrontend" ]; then
+if [ "${1}" = "botFrontend" ]; then
 	cd BotFrontend
 	npm install 
 	eb create BotFrontend-dev
 	
 fi
 
-if [ "${1}" = "TenantFrontend" ]; then
+if [ "${1}" = "tenantFrontend" ]; then
 	cd TenantFrontend
 	npm install 
 	eb create TenantFrontend-dev

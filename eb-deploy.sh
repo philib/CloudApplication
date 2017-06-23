@@ -21,14 +21,14 @@ if [ "${1}" = "tenantService" ]; then
 	eb deploy TenantService-dev
 fi
 
-if [ "${1}" = "BotFrontend" ]; then
+if [ "${1}" = "botFrontend" ]; then
     echo deploying BotFrontend
 	cd BotFrontend
 	npm install
 	eb deploy BotFrontend-dev
 fi
 
-if [ "${1}" = "TenantFrontend" ]; then
+if [ "${1}" = "tenantFrontend" ]; then
     echo deploying TenantFrontend
 	cd TenantFrontend
 	npm install
