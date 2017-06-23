@@ -4,6 +4,7 @@ var ionicWebpackFactory = require(process.env.IONIC_WEBPACK_FACTORY);
 
 const AuthService_Endpoint = process.env.AUTHSERVICE_ENDPOINT
 const TenantService_Endpoint = process.env.TENANTSERVICE_ENDPOINT
+const BotFrontend_Endpoint = process.env.BOTFRONTEND_ENDPOINT
 
 module.exports = {
   context: path.join(__dirname, ''),
@@ -38,7 +39,8 @@ module.exports = {
     ionicWebpackFactory.getIonicEnvironmentPlugin(),
       new webpack.DefinePlugin({
           _TenantService_Endpoint : JSON.stringify(TenantService_Endpoint),
-          _AuthService_Endpoint : JSON.stringify(AuthService_Endpoint)
+          _AuthService_Endpoint : JSON.stringify(AuthService_Endpoint),
+          _BotFrontend_Endpoint : JSON.stringify(BotFrontend_Endpoint)
       })
   ],
 
