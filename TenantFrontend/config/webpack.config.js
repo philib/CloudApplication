@@ -1,15 +1,9 @@
 var path = require('path');
 var webpack = require('webpack');
 var ionicWebpackFactory = require(process.env.IONIC_WEBPACK_FACTORY);
-const WebpackShellPlugin = require('webpack-shell-plugin');
 
-const build = process.env.NODE_ENV
-var configFile = 'dev.json'
-
-if(build === 'prod'){
-  console.log('using production config')
-  configFile = 'prod.json'
-}
+const AuthService_Endpoint = process.env.AUTHSERVICE_ENDPOINT
+const TenantService_Endpoint = process.env.TENANTSERVICE_ENDPOINT
 
 module.exports = {
   context: path.join(__dirname, ''),
@@ -42,8 +36,9 @@ module.exports = {
 
   plugins: [
     ionicWebpackFactory.getIonicEnvironmentPlugin(),
-      new WebpackShellPlugin({
-          onBuildEnd: ['cp config/'+configFile +' www/assets/config/default.json']
+      new webpack.DefinePlugin({
+          _TenantService_Endpoint : TenantService_Endpoint,
+          _AuthService_Endpoint :AuthService_Endpoint
       })
   ],
 
