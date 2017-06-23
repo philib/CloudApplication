@@ -26,6 +26,8 @@ export class ConfigurationPage {
         }
         console.log(this.navParams.data.tenant.name)
         console.log(this.navParams.data.tenant.configuration.botName)
+        if(_BotFrontend_Endpoint === 'undefined') _BotFrontend_Endpoint = "http://localhost:5000"
+
     }
 
     ionViewDidLoad() {
