@@ -34,6 +34,7 @@ swagger.configure(applicationUrl, '1.0.0');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(bodyParser({limit: '50mb'}));
 app.use(routes);
 
 app.use(function (err, req, res, next) {
