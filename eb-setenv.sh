@@ -4,7 +4,7 @@ source ./env
 if [ "${1}" = "authService" ]; then
     echo deploying AuthService
 	cd MicroServices/AuthService
-	eb setenv JWT_SECRET=$JWT_SECRET DB_ENDPOINT=$DB_ENDPOINT PORT=$AuthService_PORT
+	eb setenv JWT_SECRET=$JWT_SECRET DB_ENDPOINT=$DB_ENDPOINT PORT=$AuthService_PORT 
 fi
 
 if [ "${1}" = "botService" ]; then
@@ -22,11 +22,11 @@ fi
 if [ "${1}" = "botFrontend" ]; then
     echo deploying BotFrontend
 	cd BotFrontend
-	eb setenv NODE_ENV=prod
+	eb setenv BOTSERVICE_ENDPOINT=$BOTSERVICE_ENDPOINT TENANTSERVICE_ENDPOINT=$TENANTSERVICE_ENDPOINT
 fi
 
 if [ "${1}" = "tenantFrontend" ]; then
     echo deploying TenantFrontend
 	cd TenantFrontend
-	eb setenv NODE_ENV=prod
+	eb setenv AUTHSERVICE_ENDPOINT=$AUTHSERVICE_ENDPOINT TENANTSERVICE_ENDPOINT=$TENANTSERVICE_ENDPOINT BOTFRONTEND_ENDPOINT=$BOTFRONTEND_ENDPOINT
 fi
