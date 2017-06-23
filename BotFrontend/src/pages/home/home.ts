@@ -17,21 +17,24 @@ export class HomePage {
 
     ionViewDidLoad() {
         this.bot.watchBot().subscribe(bot => {
-            console.log("Bot",bot)
-            let color = bot.configuration.color;
-            if(!color){
-               color = "#32db64"
+            console.log("Bot", bot)
+
+            let color = "#32db64"
+            if (bot.configuration && bot.configuration.color) {
+                color = bot.configuration.color
             }
             console.log("color", color)
             this.renderer.setElementStyle(this.chatContent.nativeElement, 'background-color', color)
-            this.botData = bot;
-            this.botData.configuration.color = color;
-            this.chat.push({
-                msg: "Hello my name is "+ this.botData.name +", how can i help you?",
-                from: "bot",
-                color: color
-            })
 
+            this.botData = bot
+            if (bot.name) {
+
+                this.chat.push({
+                    msg: "Hello my name is " + bot.name + ", how can i help you?",
+                    from: "bot",
+                    color: color
+                })
+            }
             setTimeout(() => {
                 this.style();
             }, 10)
@@ -51,7 +54,7 @@ export class HomePage {
             let botMsg = {
                 msg: null,
                 from: "bot",
-                color: this.botData.color
+                color: this.botData.color || "#32db64"
             };
 
             this.chat.push(botMsg);
@@ -75,11 +78,15 @@ export class HomePage {
     }
 
     style() {
+        let col = "#32db64"
+        if(this.botData.configuration && this.botData.configuration.color){
+            col =this.botData.configuration.color
+        }
         var chatlist = document.getElementsByClassName('bot')
 
         for (var i = 0; i < chatlist.length; ++i) {
             var item = chatlist[i];
-            item.setAttribute('style', "background-color:"+this.botData.configuration.color || 'green' )
+            item.setAttribute('style', "background-color:" + col || 'green')
             console.log("item", item)
         }
     }
