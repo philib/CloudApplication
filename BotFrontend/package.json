@@ -10,7 +10,8 @@
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
     "test": "echo hello",
-    "aws": "npm rebuild node-sass && npm start"
+    "aws": "npm rebuild node-sass && npm start",
+	"local" : "BOTSERVICE_ENDPOINT=http://localhost:8081 TENANTSERVICE_ENDPOINT=http://localhost:8082 npm start"
   },
   "config": {
     "ionic_bundler": "webpack",

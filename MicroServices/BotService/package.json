@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "mocha --timeout 10000"
+    "test": "mocha --timeout 10000",
+	"local": "AWS_LEX_ACCESS=123123 AWS_LEX_SECRET=123123 DB_ENDPOINT=http//mydb PORT=!23123"
   },
   "author": "",
   "license": "ISC",

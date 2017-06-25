@@ -9,15 +9,16 @@ export class BaseUrl {
     private baseUrlAuth = _AuthService_Endpoint;
 
     constructor() {
-        console.log("_AuthService_Endpoint", _AuthService_Endpoint)
-        console.log("_TenantService_Endpoint", _TenantService_Endpoint)
-
-        if (_TenantService_Endpoint === 'undefined') {
+        if (!_TenantService_Endpoint) {
             this.baseUrlTenant = "http://localhost:8082/";
         }
-        if (_AuthService_Endpoint === 'undefined') {
+        if (!_AuthService_Endpoint) {
             this.baseUrlAuth = "http://localhost:8081/"
         }
+        console.log("_AuthService_Endpoint", this.baseUrlAuth)
+        console.log("_TenantService_Endpoint", this.baseUrlTenant)
+        this.baseUrlTenant = this.baseUrlTenant.replace(/\s/g, '')
+        this.baseUrlAuth = this.baseUrlAuth.replace(/\s/g, '')
     }
 
     getBaseUrl() {
@@ -33,6 +34,7 @@ export class BaseUrl {
     }
 
     getTenantsLoginUrl() {
+        console.log("getTenantsLoginUrl",this.baseUrlAuth + "login/")
         return this.baseUrlAuth + "login/"
     }
 
