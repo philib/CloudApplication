@@ -5,6 +5,7 @@ import {BaseUrl} from "../../providers/baseUrl";
 import {Http} from "@angular/http";
 import {LoginPage} from "../login/login";
 import {Storage} from '@ionic/storage'
+import {TabsPage} from "../tabs/tabs";
 declare let Huebee: any;
 declare var _BotFrontend_Endpoint: any
 
@@ -80,6 +81,6 @@ export class ConfigurationPage {
 
     logout(){
         this.storage.clear()
-        this.navCtrl.push(LoginPage)
+        window.location.reload();
     }
 }
