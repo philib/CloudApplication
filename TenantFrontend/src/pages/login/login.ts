@@ -68,11 +68,8 @@ export class LoginPage {
     constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http,
                 public baseUrl: BaseUrl, private alertCtrl: AlertController, public loadingCtrl: LoadingController, private storage: Storage) {
         this.storage.get('tenant').then(value => {
-            if(value){
-                this.http.get(this.baseUrl.getTenantConfigurationUrl(value.tenant._id,value.token)).map(res => res.json()).subscribe(data => {
-                    value.configuration=data;
-                    this.navCtrl.push(TabsPage, value)
-                })
+            if (value) {
+                this.navCtrl.push(TabsPage, value)
             }
         })
     }
@@ -95,8 +92,9 @@ export class LoginPage {
             .subscribe(data => {
                     loader.dismissAll();
                     console.log(data)
-                this.storage.set("tenant", data)
-                    this.navCtrl.push(TabsPage, data)},
+                    this.storage.set("tenant", data)
+                    this.navCtrl.push(TabsPage, data)
+                },
                 error => {
                     loader.dismissAll();
                     let alert = this.alertCtrl.create({
