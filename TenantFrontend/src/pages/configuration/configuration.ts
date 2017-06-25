@@ -19,6 +19,7 @@ declare var _BotFrontend_Endpoint: any
 export class ConfigurationPage {
     @ViewChild("picker") picker;
     isOnEdit = true;
+    botfrontend_url: any;
 
     constructor(public http: Http, public baseUrl: BaseUrl, public navCtrl: NavController, public navParams: NavParams) {
         if (!this.navParams.data.tenant.configuration.hasOwnProperty('botName')) {
@@ -26,7 +27,15 @@ export class ConfigurationPage {
         }
         console.log(this.navParams.data.tenant.name)
         console.log(this.navParams.data.tenant.configuration.botName)
-        if(_BotFrontend_Endpoint === 'undefined') _BotFrontend_Endpoint = "http://localhost:5000"
+
+        if(!_BotFrontend_Endpoint){
+            this.botfrontend_url = "http://localhost:5000/"
+        }else {
+            this.botfrontend_url = _BotFrontend_Endpoint.replace(/\s/g, '')
+
+        }
+        this.botfrontend_url += this.navParams.data.tenant.name
+        console.log("botfrontend_url",this.botfrontend_url)
 
     }
 
