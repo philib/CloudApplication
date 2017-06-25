@@ -3,6 +3,8 @@ import {NavController, NavParams} from "ionic-angular";
 import {ViewChild} from "@angular/core/src/metadata/di";
 import {BaseUrl} from "../../providers/baseUrl";
 import {Http} from "@angular/http";
+import {LoginPage} from "../login/login";
+import {Storage} from '@ionic/storage'
 declare let Huebee: any;
 declare var _BotFrontend_Endpoint: any
 
@@ -21,7 +23,7 @@ export class ConfigurationPage {
     isOnEdit = true;
     botfrontend_url: any;
 
-    constructor(public http: Http, public baseUrl: BaseUrl, public navCtrl: NavController, public navParams: NavParams) {
+    constructor(public http: Http, public baseUrl: BaseUrl, public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
         if (!this.navParams.data.tenant.configuration.hasOwnProperty('botName')) {
             this.navParams.data.tenant.configuration.botName = ""
         }
@@ -74,5 +76,10 @@ export class ConfigurationPage {
                 },
                 error => {
                 });
+    }
+
+    logout(){
+        this.storage.clear()
+        this.navCtrl.push(LoginPage)
     }
 }

@@ -3,6 +3,7 @@ import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 import {MyApp} from './app.component';
 import {LoginPage} from '../pages/login/login'
 import {RegisterPage} from '../pages/register/register'
+import { IonicStorageModule  } from '@ionic/storage';
 
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
@@ -19,6 +20,7 @@ import {RepairServiceDetailPage} from "../pages/repair-service-detail/repair-ser
 import {AddResellerPage} from "../pages/add-reseller/add-reseller";
 import {ResellerDetailPage} from "../pages/reseller-detail/reseller-detail";
 import {BillPage} from "../pages/bill/bill";
+import {BrowserModule} from "@angular/platform-browser";
 
 @NgModule({
     declarations: [
@@ -40,7 +42,9 @@ import {BillPage} from "../pages/bill/bill";
 
     ],
     imports: [
-        IonicModule.forRoot(MyApp)
+        BrowserModule,
+        IonicModule.forRoot(MyApp),
+        IonicStorageModule.forRoot()
     ],
     bootstrap: [IonicApp],
     entryComponents: [

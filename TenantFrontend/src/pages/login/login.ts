@@ -5,6 +5,7 @@ import {Http} from "@angular/http";
 import "rxjs/add/operator/map";
 import {BaseUrl} from "../../providers/baseUrl";
 import {TabsPage} from "../tabs/tabs";
+import {Storage} from '@ionic/storage'
 
 @Component({
     selector: 'page-login',
@@ -65,8 +66,15 @@ export class LoginPage {
     private password;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http,
-                public baseUrl: BaseUrl, private alertCtrl: AlertController, public loadingCtrl: LoadingController) {
-
+                public baseUrl: BaseUrl, private alertCtrl: AlertController, public loadingCtrl: LoadingController, private storage: Storage) {
+        this.storage.get('tenant').then(value => {
+            if(value){
+                this.http.get(this.baseUrl.getTenantConfigurationUrl(value.tenant._id,value.token)).map(res => res.json()).subscribe(data => {
+                    value.configuration=data;
+                    this.navCtrl.push(TabsPage, value)
+                })
+            }
+        })
     }
 
     ionViewDidLoad() {
@@ -87,6 +95,7 @@ export class LoginPage {
             .subscribe(data => {
                     loader.dismissAll();
                     console.log(data)
+                this.storage.set("tenant", data)
                     this.navCtrl.push(TabsPage, data)},
                 error => {
                     loader.dismissAll();
