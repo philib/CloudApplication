@@ -9,7 +9,7 @@ exports.getAllTenants = function (req, res, next) {
     var namequery = req.query.name;
     var selector = "_id name configuration.color configuration.botName"
     if(namequery){
-        tenantModel.find({name:  { $regex : new RegExp(namequery, "i") }},selector).exec(function (err, data) {
+        tenantModel.find({name:   { $regex: new RegExp("^" + namequery+"$", "i") }},selector).exec(function (err, data) {
             if (err) return next(err);
             if(data.length > 0){
                 return res.json(data[0]);
