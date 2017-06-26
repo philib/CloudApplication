@@ -43,7 +43,7 @@ tenant.save(function (err, data) {
     }
     id = data._id
     console.log("id", id)
-    var token = jwt.sign(data, jwt_secret, {
+    var token = jwt.sign({_id:id}, jwt_secret, {
         expiresIn: "1d" // expires after 1 year
     });
 
